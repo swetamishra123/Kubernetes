@@ -1,0 +1,5 @@
+## Containerization Concepts (Docker):
+Docker is a popular platform for developing, shipping, and running applications in containers. A basic understanding of Docker implies familiarity with containerization principles, including how to create Docker images, run containers, and manage containerized applications. Users with prior exposure to Docker will likely find it easier to grasp Kubernetes concepts, as Kubernetes often works with Docker containers.
+
+## Cloud Environments:
+Many Kubernetes deployments are on cloud platforms such as AWS, Google Cloud Platform (GCP), or Microsoft Azure. Familiarity with cloud environments implies a general understanding of cloud services, infrastructure, and the ability to navigate cloud platforms. Knowledge of concepts like virtual machines, networking, and storage in a cloud context can be beneficial when working with Kubernetes, which often integrates with cloud resources.
