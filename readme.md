@@ -54,4 +54,6 @@ Apply your knowledge to real-world scenarios with practical examples and use cas
 ## Prerequisites
 Basic understanding of containerization concepts (Docker) and some familiarity with cloud environments will be beneficial.
 
-Embark on your Kubernetes journey today and transform from a beginner to a Kubernetes hero! Fork, star, and contribute to this repository as we build a vibrant community of Kubernetes enthusiasts. Happy learning! 🎉
+Embark on your Kubernetes journey today and transform from a beginner to a Kubernetes hero! 
+Fork, star, and contribute to this repository as we build a vibrant community of Kubernetes enthusiasts.
+Happy learning! 🎉
