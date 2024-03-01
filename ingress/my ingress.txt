@@ -1,0 +1,84 @@
+----deployapache2.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache2-deployment
+  labels:
+    app: apache
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+      - name: apache2
+        image: httpd:2.4
+        ports:
+        - containerPort: 80
+-----deploynginx.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+-----vi ingresrule.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /nginx
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+      - path: /apache
+        pathType: Prefix
+        backend:
+          service:
+            name: apache
+            port:
+              number: 8080
+
+
+
+------commands
+kubectl create -f deployapache2.yaml
+kubectl create -f deploynginx.yaml
+kubectl create service clusterip nginx --tcp=80:80
+kubectl create service clusterip apache --tcp=8080:80
+kubectl create -f https://raw.githubusercontent.com/lerndevops/labs/master/kube/ingress/nginx-ing-controller.yaml
+kubectl create -f ingresrule.yaml
+kubectl get svc -o wide  //copy nodeport and check on which node service is running and accordingly type ip address in url
+https://ipaddress:nodeport/apache
+https://ipaddress:nodeport/nginx
+
+
