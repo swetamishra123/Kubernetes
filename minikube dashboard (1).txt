@@ -1,0 +1,101 @@
+Run in vmware ubuntu machine 
+
+
+
+$ mkdir minikube
+$ cd minikube
+$  sudo apt update
+$  sudo apt install apt-transport-https ca-certificates curl software-properties-common
+$  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$  sudo add-apt-repository "deb [arch=amd64]
+https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ 
+$  sudo apt update
+$  sudo apt install docker-ce
+$  sudo systemctl start docker
+$  sudo systemctl enable docker
+
+$  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+$  sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+$  minikube start --force --driver=docker
+$  systemctl status docker
+$  docker ps
+$  sudo chown $USER /var/run/docker.sock
+$  docker ps
+$  minikube start --force --driver=docker
+$  minikube status
+$  kubectl get nodes
+$  sudo apt install kubectl
+$  snap install kubectl
+$  sudo apt-get install kubectl
+$  sudo apt-get update
+$  sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+$  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+$  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+$  sudo apt-get update
+$  sudo apt-get install -y kubelet kubeadm kubectl
+$  sudo apt-mark hold kubelet kubeadm kubectl
+$  sudo systemctl enable --now kubelet
+$  kubectl get nodes
+$  sudo minikube dashboard
+$  minikube start
+$  sudo minikube dashboard
+ 
+$  sudo minikube dashboard -url
+$  vim deployment.yaml
+============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+=====================================================================
+$  kubectl apply -f deployment.yaml
+$  kubectl get deployments
+$  kubectl get pods
+
+ 
+$  vim pod.yaml
+===============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+==============================================================
+$ kubectl apply -f pod.yaml
+$  kubectl get pods
+$ docker ps
+$ kubectl get services
+$ minikube ip
+$  minikube service nginx --url
+$  minikube dashboard
+$ sudo minikube dashboard
+$  minikube start
+$ sudo minikube dashboard
+$  minikube dashboard
+
+
+now run the url in the browser to see the dashboard-   http://127.0.0.1:38785/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
